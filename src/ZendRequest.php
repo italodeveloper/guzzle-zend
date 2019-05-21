@@ -21,8 +21,11 @@ class ZendRequest
     protected $guzzle;
     /** @var $client */
     protected $client;
-    public function __construct(array $guzzle)
+    public function __construct($guzzle = null)
     {
+        if(\is_null($guzzle)){
+            $guzzle['base_uri'] = '';
+        }
         $this->client = new Client();
         $this->guzzle = $guzzle;
     }  
