@@ -117,17 +117,19 @@ class ZendRequest
         $properties = \get_object_vars($this);
         $request = $properties['request'];
 
-        $httpNews = ['PUT', 'PATH', 'DELETE'];
-        foreach ($httpNews as $requestMethod){
-            if(isset($request['ZendRequest']) && !empty($request['ZendRequest'])){
-                if(isset($request['ZendRequest'][$requestMethod])){
-                    if(!is_array($request['ZendRequest'][$requestMethod])){
-                        $jsonResponse = \json_decode($request['ZendRequest'][$requestMethod], true);
-                        if(is_array($jsonResponse) && !empty($jsonResponse)){
-                            return \json_encode($jsonResponse);
+        if(is_array($request)){
+            $httpNews = ['PUT', 'PATH', 'DELETE'];
+            foreach ($httpNews as $requestMethod){
+                if(isset($request['ZendRequest']) && !empty($request['ZendRequest'])){
+                    if(isset($request['ZendRequest'][$requestMethod])){
+                        if(!is_array($request['ZendRequest'][$requestMethod])){
+                            $jsonResponse = \json_decode($request['ZendRequest'][$requestMethod], true);
+                            if(is_array($jsonResponse) && !empty($jsonResponse)){
+                                return \json_encode($jsonResponse);
+                            }
                         }
+                        return $request['ZendRequest'][$requestMethod];
                     }
-                    return $request['ZendRequest'][$requestMethod];
                 }
             }
         }
