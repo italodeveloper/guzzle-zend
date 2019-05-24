@@ -31,6 +31,19 @@ class ZendRequest
     }  
     
     /**
+     * getConfig function
+     *
+     * Retorna as configurações setadas pelo usuario
+     * via injeção de dependencia.
+     * 
+     * @return array|void
+     */
+    public function getConfig()
+    {
+        return $this->guzzle;
+    }
+
+    /**
      * request function
      *
      * Simula a request do Guzzle utilizando o Zend Http
